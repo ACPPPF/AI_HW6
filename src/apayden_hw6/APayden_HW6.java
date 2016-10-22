@@ -19,7 +19,6 @@ public class APayden_HW6 {
         g.getRow(4).getSquare(0).setNumAdj(0);
         g.getRow(3).getSquare(2).setNumAdj(1);
         g.printGrid();
-        g.printGrid();
     }
     
 }
