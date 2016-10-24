@@ -12,13 +12,15 @@ import java.io.Serializable;
  * @author AP047572
  */
 public class Square implements Serializable {
-    private final int colNum;
+    private final int col;
+    private final int row;
     private int numAdj;
     private boolean shaded;
     private int adjShaded;
     
-    public Square(int colNum) {
-        this.colNum = colNum;
+    public Square(int row, int col) {
+        this.col = col;
+        this.row = row;
         this.numAdj = -1;
         this.shaded = false;
         this.adjShaded = 0;
@@ -27,10 +29,15 @@ public class Square implements Serializable {
     public void setNumAdj(int adj) {
         this.numAdj = adj;
         this.shaded = false;
+        this.adjShaded = 0;
     }
     
     public int getColNum() {
-        return this.colNum;
+        return this.col;
+    }
+    
+    public int getRowNum() {
+        return this.row;
     }
     
     public int getNumAdj() {
@@ -49,5 +56,9 @@ public class Square implements Serializable {
         if(this.numAdj != -1) {
             ++this.adjShaded;
         }
+    }
+    
+    public int getAdjShaded() {
+        return this.adjShaded;
     }
 }

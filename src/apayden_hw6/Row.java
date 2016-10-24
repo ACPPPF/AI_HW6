@@ -14,18 +14,20 @@ import java.util.ArrayList;
  */
 public class Row implements Serializable {
     private final int rowSize;
+    private final int rowNum;
     private final ArrayList<Square> squares;
-    private ArrayList<Square> possibleSquares;
+    private ArrayList<Integer> possibleSquares;
     private int shaded;
    
-   public Row(int rowSize) {
+   public Row(int rowSize, int rowNum) {
+       this.rowNum = rowNum;
        this.rowSize = rowSize;
        this.squares = new ArrayList<>(rowSize);
        this.possibleSquares = new ArrayList<>(rowSize);
-       for(int r = 0; r < rowSize; ++r) {
-           Square square = new Square(r);
+       for(int c = 0; c < rowSize; ++c) {
+           Square square = new Square(rowNum, c);
            this.squares.add(square);
-           this.possibleSquares = squares;
+           this.possibleSquares.add(c);
        }
        this.shaded = -1;
    }
@@ -35,7 +37,8 @@ public class Row implements Serializable {
    }
    
    public void setShaded(int shaded) {
-       this.shaded = -1;
+       this.getSquare(shaded).setShaded();
+       this.shaded = shaded;
    }
    
    public int getRowSize() {
@@ -54,7 +57,25 @@ public class Row implements Serializable {
        }
    }
    
+   public int getRowNum() {
+       return this.rowNum;
+   }
+   
    public Square getSquare(int col) {
        return this.squares.get(col);
+   }
+   
+   public void setSquareAdj(int col, int num) {
+       this.getSquare(col).setNumAdj(num);
+       Integer column = col;
+       this.possibleSquares.remove(column);
+   }
+   
+   public ArrayList<Integer> getFreeSquares() {
+       return this.possibleSquares;
+   }
+   
+   public void removeFree(Integer col) {
+       this.possibleSquares.remove(col);
    }
 }

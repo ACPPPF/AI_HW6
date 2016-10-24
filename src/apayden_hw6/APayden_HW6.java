@@ -16,10 +16,10 @@ public class APayden_HW6 {
      */
     public static void main(String[] args) {
         Grid g = new Grid(5,5);
-        g.getRow(4).getSquare(0).setNumAdj(0);
-        g.getRow(3).getSquare(2).setNumAdj(1);
+        g.setSquareNumbers(4, 0, 0);
+        g.setSquareNumbers(3, 2, 1);
         g.printGrid();
-        System.out.println("This is a test");
+        g.printFree();
+        g.forwardCheck();
     }
-    
 }
